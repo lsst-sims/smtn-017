@@ -1,24 +1,21 @@
 \section{Metrics}
 
 
-xxx--Quick summary of the metrics used here. There are many more metrics, but these are the ones chosen to highlight since they are easy to interpret, and/or have simple limitations.
 
-
-
-\subsection{Wide Area Metics}
+\subsection{Wide Area Metrics}
 
 \noindent{\bf Parallax}: A measure of the parallax precision in the best 18k square degrees of the survey (probably, the WFD area).  \\
 {\bf Proper Motion}: A measure of the proper motion precision in the best 18k square degrees of the survey (probably, the WFD area). \\
 {\bf Fast Microlensing events}: Microlensing events between 5 and 10 days in duration. \\
 {\bf Slow Microlensing events}: Microlensing events between 60 and 90 days in duration.\\
 {\bf SRD fO value}: \\
-{\bf Bright NEOs}: Fraction of with H=16 Near Earth Asteriod objects discovered. \\
+{\bf Bright NEOs}: Fraction of with H=16 Near Earth Asteroid objects discovered. \\
 {\bf Faint NEOs}: NEO objects with H=22. \\
 {\bf TNOs}: Fraction of H=6.0 Trans Neptunian Objects discovered.  \\
 {\bf SNe}: The number of type Ia supernovae that are observed up to a redshift completeness limit. \\
 {\bf 3x2}: Figure of merit for the 3x2 correlation. Only uses i-band. \\
 {\bf Weak Lensing}: Number of visits in i-band that are suitable for weak lensing observations, includes an extinction cut. \\
-{\bf Transients, KNe}: The PrestoKNe metric. This metric generates 10,000 events. Unfortunatly, in the baseline only around 400 of the events are detected, so we exepct a run-to-run shot noise of ~5\%. The metric returns two scores ("P" and "S") which are highly correlated.  \\
+{\bf Transients, KNe}: The PrestoKNe metric. This metric generates 10,000 events. Unfortunately, in the baseline only around 400 of the events are detected, so we expect a run-to-run shot noise of ~5\%. The metric returns two scores ("P" and "S") which are highly correlated.  \\
 
 
 \subsection{DDF metrics}
@@ -28,13 +25,108 @@ xxx--Quick summary of the metrics used here. There are many more metrics, but th
 
 
 
-\begin{figure}
-\plotone{plots/baseline2_radar.pdf}
-\caption{\label{baseline2_radar}}
-\end{figure}
 
 \section{Baseline Evolution}
 
+XXX--maybe add the footprint plots for the 4 relevant baselines
+
+
+
 Run through the baseline sims. 
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/baseline2_radar.pdf}\plotone{plots/baseline2_radar_zoom.pdf}
+\epsscale{1}
+\caption{The science impact of our latest baseline simulation. \label{baseline2_radar}}
+\end{figure}
+
+
+
+
+
+\section{v2.0 Results}
+
+
+
+\subsection{Bluer}
+
+\begin{table}
+\begin{tabular}{lrrrrrr}
+\toprule
+{} &   u &   g &    r &    i &   z &   y \\
+baseline\_v2.0    & 3.2 & 4.0 & 10.0 & 10.0 & 9.0 & 9.0 \\
+bluer\_indx0\_v2.0 & 3.3 & 5.7 & 10.0 & 10.0 & 9.0 & 9.5 \\
+bluer\_indx1\_v2.0 & 3.8 & 5.2 & 10.0 & 10.0 & 9.0 & 9.5 \\
+\end{tabular}
+\label{table:blue}
+\end{table}
+
+We run a few simulations where we increase the fraction of time spent in $g$\ and $r$\ filters. The relative number of observations in each filter is listed in Table~\ref{table:blue}. Figure~\ref{fig:bluer_radar} shows no major improvement for any science case. We had expected SNe could benefit from added blue observations, however, since we still heavily favor red filters in bright time, the cadence of blue observations does not change enough to help the SNe metric.
+
+{\bf Conclusion:  We find no major improvement in taking more blue observations, but should confirm the final distribution with a robust photo-z metric.}
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/bluer.pdf}
+\plotone{plots/bluer_mags.pdf}
+\epsscale{1}
+\caption{The science impact of shifting to bluer filters. We see no significant gains in any particular science case.\label{fig:bluer_radar}}
+\end{figure}
+
+\subsection{Long $u$}
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/long_u.pdf}
+\plotone{plots/long_u_mags.pdf}
+\epsscale{1}
+\caption{The science impact of taking longer $u$\ observations. We see no significant gains in any particular science case.\label{fig:long_u}}
+\end{figure}
+
+
+The long\_u1 run increases the $u$-band exposure time to 50s leaving the relative number of observations the same while long\_u2 increases the exposure time but decreases the total number of observations in $u$. 
+
+Looks like we don't really have a metric that is sensitive to increasing $u$-depth. We do get a significant depth increase in $u$\ in both cases. If there is no case for the higher cadence, the long\_u2 run seems to have extra depth "for free".
+
+{\bf Conclusion:  Increasing the total time spent in $u$\ has detrimental effects to some science metrics. We currently don't see any science improvements from shifting to 50s $u$ exposures. XXX--mention what the added depth is.}
+
+
+\subsection{Rolling}
+
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/rolling_ns.pdf}
+\epsscale{1}
+\caption{Various rolling cadence experiments. \label{fig:rolling}}
+\end{figure}
+
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/rolling_more.pdf}
+\epsscale{1}
+\caption{Various rolling cadence experiments. \label{fig:rolling_more}}
+\end{figure}
+
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/rolling_bulge.pdf}
+\epsscale{1}
+\caption{Rolling in the bulge area. No significant gains, and it can hurt microlensing. \label{fig:rolling_more}}
+\end{figure}
+
+We test rolling with different fractions of the sky (half, third, sixth), and two different strengths (50\% and 90\%). 
+Our baseline of half sky at 80-90\% seems fairly close to ideal. Rolling with smaller area can boost SNe and TDE metrics, but at significant penalty for proper motions and faint NEOs.
+
+Turning off rolling gives a modest boost to astrometry metrics, but is very bad for almost all transients. 
+
+The `roll\_early` tests the impact of adding an additional rolling season. This gives a nice boost to SNe and transients, with a small impact on proper motions. I guess I can point out that if the survey extends slightly, that proper motion precision can be recovered, but once the transients are gone, they are gone forever.
+
+Adding rolling in the bulge doesn't have any perks. We might need more bulge-specific transient metrics.
+
+
+Figure~\ref{fig:rolling_more} shows having no rolling has a significant impact on SNe and KNe while starting rolling early to gain an additional season of rolling gives a boost with only a slight penalty to proper motions. 
 
 
