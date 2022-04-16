@@ -10,7 +10,7 @@
 {\bf Slow Microlensing events}: Microlensing events between 60 and 90 days in duration.\\
 {\bf SRD fO value}: \\
 {\bf Bright NEOs}: Fraction of with H=16 Near Earth Asteroid objects discovered. \\
-{\bf Faint NEOs}: NEO objects with H=22. \\
+{\bf Faint NEOs}: NEO objects with H=22. Note this metric can have significant variations due to shot noise.\\
 {\bf TNOs}: Fraction of H=6.0 Trans Neptunian Objects discovered.  \\
 {\bf SNe}: The number of type Ia supernovae that are observed up to a redshift completeness limit. \\
 {\bf 3x2}: Figure of merit for the 3x2 correlation. Only uses i-band. \\
@@ -34,14 +34,19 @@ XXX--maybe add the footprint plots for the 4 relevant baselines
 
 Run through the baseline sims. 
 \begin{figure}
+\plottwo{plots/baseline2_radar.pdf}{plots/baseline2_radar_zoom.pdf}
+\caption{The science impact of our latest baseline simulation. \label{fig:baseline2_radar}}
+\end{figure}
+
+\begin{figure}
 \epsscale{0.6}
-\plotone{plots/baseline2_radar.pdf}\plotone{plots/baseline2_radar_zoom.pdf}
+\plotone{plots/baselines_mags.pdf}
 \epsscale{1}
-\caption{The science impact of our latest baseline simulation. \label{baseline2_radar}}
+\caption{ \label{fig:baseline_mags}}
 \end{figure}
 
 
-
+The latest v2.1 baseline is shallower than previous baselines. This is mainly due to changing the footprint to expand the WFD area to XXX sq degrees. Not really sure why the 2.1 is also ~0.05 mags less than 2.0 in most filters. Was there some other throughput change or something? 
 
 
 \section{v2.0 Results}
@@ -63,10 +68,10 @@ bluer\_indx1\_v2.0 & 3.8 & 5.2 & 10.0 & 10.0 & 9.0 & 9.5 \\
 
 We run a few simulations where we increase the fraction of time spent in $g$\ and $r$\ filters. The relative number of observations in each filter is listed in Table~\ref{table:blue}. Figure~\ref{fig:bluer_radar} shows no major improvement for any science case. We had expected SNe could benefit from added blue observations, however, since we still heavily favor red filters in bright time, the cadence of blue observations does not change enough to help the SNe metric.
 
-{\bf Conclusion:  We find no major improvement in taking more blue observations, but should confirm the final distribution with a robust photo-z metric.}
+{\bf Conclusion:  We find no major improvement in taking more blue observations, but should confirm the final filter depth distributions with a robust photo-z metric.}
 
 \begin{figure}
-\epsscale{0.6}
+\epsscale{0.5}
 \plotone{plots/bluer.pdf}
 \plotone{plots/bluer_mags.pdf}
 \epsscale{1}
@@ -76,7 +81,7 @@ We run a few simulations where we increase the fraction of time spent in $g$\ an
 \subsection{Long $u$}
 
 \begin{figure}
-\epsscale{0.6}
+\epsscale{0.5}
 \plotone{plots/long_u.pdf}
 \plotone{plots/long_u_mags.pdf}
 \epsscale{1}
@@ -88,7 +93,7 @@ The long\_u1 run increases the $u$-band exposure time to 50s leaving the relativ
 
 Looks like we don't really have a metric that is sensitive to increasing $u$-depth. We do get a significant depth increase in $u$\ in both cases. If there is no case for the higher cadence, the long\_u2 run seems to have extra depth "for free".
 
-{\bf Conclusion:  Increasing the total time spent in $u$\ has detrimental effects to some science metrics. We currently don't see any science improvements from shifting to 50s $u$ exposures. XXX--mention what the added depth is.}
+{\bf Conclusion:  Increasing the total time spent in $u$\ has detrimental effects to some science metrics. We currently don't see any science improvements from shifting to 50s $u$ exposures, but the final coadded depth increases and there is a small increase in the SRD fO metric.}
 
 
 \subsection{Rolling}
@@ -129,4 +134,77 @@ Adding rolling in the bulge doesn't have any perks. We might need more bulge-spe
 
 Figure~\ref{fig:rolling_more} shows having no rolling has a significant impact on SNe and KNe while starting rolling early to gain an additional season of rolling gives a boost with only a slight penalty to proper motions. 
 
+
+\subsection{Presto}
+
+The presto runs look to gather 3 observations in a night on various time scales.
+
+XXX--want some depth plots of this
+
+\subsection{Long Gaps}
+
+The long\_gaps sims are similar to the presto runs, but are more focused on gathering observations at longer timescales.
+
+\subsection{Vary Galactic Plane}
+
+
+
+\subsection{Vary North Ecliptic Spur}
+
+\begin{figure}
+\plottwo{plots/vary_nes1.pdf}{plots/vary_nes2.pdf}
+\caption{Results from varying the amount of time spent in the NES. \label{fig:vary_nes}}
+\end{figure}
+
+\begin{figure}
+\plottwo{plots/vary_nes_mags.pdf}{plots/vary_nes_mags2.pdf}
+\caption{Results from varying the amount of time spent in the NES. Left plot shows NES fractions lower than the baseline, right panel shows NES fractions larger than the baseline.\label{fig:vary_nes}}
+\end{figure}
+
+
+Many of the solar system metrics are fairly insensitive to the fraction of time spent on the NES. I'll leave it to the solar system collaboration to make the case for where they think the optimal fraction is. Might be some potential to shave a little bit of time off of NES. The science gains from going from the baseline of 30\% down to something like 15\% are minimal though.
+
+{\bf Conclusions:  The SSSC should look in depth to confirm the impact of changing the NES fraction. Seems like the current level or slightly less time is the optimal.}
+
+
+\subsection{Microsurveys}
+
+ToO: Observing 10 or 50 ToOs per year. Minor impact on the science metrics.
+
+
+Carina:  Observing the Carina star forming region intensely for a week per year.  Very minor impact, as expected.
+
+
+local\_gals:  
+
+multi\_short:  Taking multiple short exposures. Note this may no longer be feasible with the latest constraints.
+
+north\_stripe:  Adding coverage to the north. Very minor impact on most metrics, but it would probably only help us recover a handful of ToO events. And we probably want to keep the ToO chasing in the WFD area as much as possible anyway.
+
+roman: Observing RGES field for microlensing. Indeed, makes the fast microlensing metric go up. Virtually zero impact on the rest of the survey. Looks like these were 0.07\% of the total time. 
+
+short\_exp: Covering the sky with short exposures. 
+
+smc\_movie: Continuous observations of the SMC. 
+
+twilight\_neo:  Using short exposures in twilight to look for NEOs. Note this may no longer be feasible with the latest constraints on how often the shutter can move without generating too much heat. Despite 
+
+virgo\_cluster:  Adding the Virgo cluster to the WFD footprint. This was such a minor change that we adopted it into the v2.1 baseline.
+
+
+\section{v2.1 Runs}
+
+\subsection{Galactic Plane Runs}
+
+We ran a variety of footprint variations requested by the community. These runs have some issues because they can make it difficult for the scheduler to identify large contiguous regions of sky to observe in blocks.
+
+
+
+
+
+\section{Metrics That Would Help}
+
+xxx--currently looking at running the photo-z metric to get more info on filter distribution in WFD and the DDFs.
+
+xxx--We have some AGN metrics, I'm not sure they show much at the moment. We may need to configure, modify them a bit to get more info.
 
