@@ -25,6 +25,7 @@ clean:
 	rm -f $(DOCNAME).bbl
 	rm -f $(DOCNAME).pdf
 	rm -f meta.tex
+	rm -f authors.tex
 
 .FORCE:
 
