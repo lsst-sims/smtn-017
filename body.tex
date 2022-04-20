@@ -124,7 +124,7 @@ Looks like we don't really have a metric that is sensitive to increasing $u$-dep
 \epsscale{0.6}
 \plotone{plots/rolling_bulge.pdf}
 \epsscale{1}
-\caption{Rolling in the bulge area. No significant gains, and it can hurt microlensing. \label{fig:rolling_more}}
+\caption{Rolling in the bulge area. No significant gains, and it can hurt microlensing. \label{fig:rolling_bulge}}
 \end{figure}
 
 We test rolling with different fractions of the sky (half, third, sixth), and two different strengths (50\% and 90\%). 
@@ -172,7 +172,7 @@ xxx--need to double check what the astrometry SRD values are, the most aggressiv
 
 \begin{figure}
 \plottwo{plots/presto_sne.pdf}{plots/presto_astrom.pdf}
-\caption{The SNe and astrometry metrics for the various presto runs. \label{fig:presto_metics} }
+\caption{The SNe and astrometry metrics for the various presto runs. Baseline circled in red. \label{fig:presto_metics} }
 \end{figure}
 
 \subsection{Long Gaps}
@@ -181,7 +181,7 @@ The long\_gaps sims are similar to the presto runs, but are more focused on gath
 
 \subsection{Vary Galactic Plane}
 
-xxx--Varying the amount of time spent in the plane
+xxx--Varying the amount of time spent in the plane. This may be obsolete now with the v2.1 galactic plane footprint simulations. 
 
 
 \subsection{Vary North Ecliptic Spur}
@@ -193,7 +193,7 @@ xxx--Varying the amount of time spent in the plane
 
 \begin{figure}
 \plottwo{plots/vary_nes_mags.pdf}{plots/vary_nes_mags2.pdf}
-\caption{Results from varying the amount of time spent in the NES. Left plot shows NES fractions lower than the baseline, right panel shows NES fractions larger than the baseline.\label{fig:vary_nes}}
+\caption{Results from varying the amount of time spent in the NES. Left plot shows NES fractions lower than the baseline, right panel shows NES fractions larger than the baseline.\label{fig:vary_nes_mags}}
 \end{figure}
 
 
@@ -204,23 +204,71 @@ Many of the solar system metrics are fairly insensitive to the fraction of time 
 
 \subsection{Microsurveys}
 
-ToO: Observing 10 or 50 ToOs per year. Minor impact on the science metrics.
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/north_stripe.pdf}
+\plotone{plots/footprints/north_stripe_v2_0_10yrs_Count_observationStartMJD_HEAL_SkyMap.pdf}
+\epsscale{1}
+\caption{Impact of adding a northern stripe to the footprint. \label{fig:north_stripe} }
+\end{figure}
 
 
-Carina:  Observing the Carina star forming region intensely for a week per year.  Very minor impact, as expected.
+
+\begin{figure}
+\plotone{plots/carina.pdf}
+\caption{Impact of including the Carina microsurvey.  \label{fig:carina}}
+\end{figure}
 
 
-local\_gals:  Observing local galaxies to extra depth. 
+\begin{figure}
+\plotone{plots/local_gals.pdf}
+\epsscale{0.4}
+\plotone{plots/footprints/local_gal_bindx0_v2_0_10yrs_Count_observationStartMJD_HEAL_SkyMap.pdf}
+\plotone{plots/footprints/local_gal_bindx1_v2_0_10yrs_Count_observationStartMJD_HEAL_SkyMap.pdf}
+\plotone{plots/footprints/local_gal_bindx2_v2_0_10yrs_Count_observationStartMJD_HEAL_SkyMap.pdf}
+\epsscale{1}
+\caption{Impact of including the local galaxies microsurvey. \label{fig:local_gals}}
+\end{figure}
+
+\begin{figure}
+\plotone{plots/roman.pdf}
+\caption{Impact of observing the Roman field.  \label{fig:roman}}
+\end{figure}
+
+
+\begin{figure}
+\plotone{plots/short_exp.pdf}
+\caption{Impact of observing short exposure times.  \label{fig:short_exp}}
+\end{figure}
+
+\begin{figure}
+\plotone{plots/smc_movie.pdf}
+\caption{Impact of observing the SMC in movie mode.  \label{fig:smc}}
+\end{figure}
+
+
+\begin{figure}
+\plotone{plots/twilight.pdf}
+\caption{Impact of observing NEOs in twilight time. Surprisingly reduces the fraction of faint NEOs recovered. \label{fig:twilight}}
+\end{figure}
+
+ToO: Observing 10 or 50 ToOs per year. Minor impact on the science metrics as most ToO observations are in the WFD area.
+
+
+Carina:  Observing the Carina star forming region intensely for a week per year, only 2,354 visits total.  Very minor impact, as expected.
+
+
+local\_gals:  Observing local galaxies to extra depth in $gri$ to various levels. Note that these requested extra visits were assuming outdated baseline depths from minion\_1016, so may not be feasible anymore.
 
 multi\_short:  Taking multiple short exposures. Note this may no longer be feasible with the latest constraints on shutter motions and heat generation.
 
 north\_stripe:  Adding coverage to the north. Very minor impact on most metrics, but it would probably only help us recover a handful of ToO events. And we probably want to keep the ToO chasing in the WFD area as much as possible anyway.
 
-roman: Observing RGES field for microlensing. Indeed, makes the fast microlensing metric go up. Virtually zero impact on the rest of the survey. Looks like these were 0.07\% of the total time. 
+roman: Observing RGES field for microlensing. Indeed, makes the fast microlensing metric go up. Virtually zero impact on the rest of the survey. Looks like these were 0.07\% of the total number of visits. 
 
-short\_exp: Covering the sky with short exposures. 
+short\_exp: Covering the sky with short exposures. Note this may no longer be feasible with the latest constraints on shutter motions and heat generation.
 
-smc\_movie: Continuous observations of the SMC. 
+smc\_movie: Continuous observations of the SMC. This was only 2 nights on 15s exposures in g for 2780 visits. 
 
 twilight\_neo:  Using short exposures in twilight to look for NEOs. Note this may no longer be feasible with the latest constraints on how often the shutter can move without generating too much heat. There is little to no gain in the fraction of NEOs recovered with these simulations. Need to test with a population of objects interior to Venus to see if there is actually a science case for these observations.  
 
@@ -260,7 +308,7 @@ xxx--already trying to gather good seeing images in some filters in the baseline
 \end{figure}
 
 
-We try standard exposure times from 20-40s.  The SNe metric seems surprisingly peaked at 30-32s for standard exposure times. 
+We try standard exposure times from 20-40s.  The SNe metric seems surprisingly peaked at 30-32s for standard exposure times. This might be due to how they quantize redshift limits, since the number of SNe returned by the metric are the sum below a redshift completeness limit, a shift of 0.025 in the redshift limit could make a large change in N SNe($<z_{lim}$), but the actual total number of SNe would change more smoothly. 
 
 Note, the boost in the WL metric is artificial since it is based on number of observations and thus does not take into account the lower SNR of short exposures. 
 
@@ -279,7 +327,7 @@ I'm not sure why proper motion and parallax benefit from shorter exposure times.
 This series of runs looks at preventing more than two observations to a point within a night. As expected, this helps SNe. Unexpectedly, this also boosts the KNe transient metric. We need to check why this happens and if it is real since the KNe metric should have a 5\% scatter.
 
 
-{\bf Conclusions:  Taking steps to suppress extra repeat visits within a night seems like it could help multiple science cases.}
+{\bf Conclusions:  Taking steps to suppress extra repeat visits within a night seems like it could help multiple science cases. It is tough to tell if the KNe metric increase is "real", or if the v2.1 baseline is simply a $\sim 2\sigma$ low realization.}
 
 
 \subsection{DDF Season Length}
