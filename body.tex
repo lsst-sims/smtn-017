@@ -16,7 +16,6 @@
 {\bf 3x2}: Figure of merit for the 3x2 correlation. Only uses i-band. \\
 {\bf Weak Lensing}: Number of visits in i-band that are suitable for weak lensing observations, includes an extinction cut. \\
 {\bf Transients, KNe}: The PrestoKNe metric. This metric generates 10,000 events. Unfortunately, in the baseline only around 400 of the events are detected, so we expect a run-to-run shot noise of ~5\%. The metric returns two scores ("P" and "S") which are highly correlated.  \\
-{\bf XRB}: Number of X-ray binaries that are detected early.\\
 
 
 \subsection{DDF metrics}
@@ -253,6 +252,17 @@ Many of the solar system metrics are fairly insensitive to the fraction of time 
 \plotone{plots/twilight.pdf}
 \caption{Impact of observing NEOs in twilight time. Surprisingly reduces the fraction of faint NEOs recovered. \label{fig:twilight}}
 \end{figure}
+
+\begin{figure}
+% from https://github.com/lsst-sims/sims_featureScheduler_runs2.0/blob/main/microsurveys/twilight_neo/check_twi.ipynb
+\epsscale{0.6}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_note!twilight_neo_HEAL_SkyMap.pdf}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_notetwilight_neo_HEAL_SkyMap.pdf}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_notetwilight_neo_and_night10_HEAL_SkyMap.pdf}
+\epsscale{1}
+\caption{Number of visits in Alt,Az projection for the twilight NEO microsurvey. The top panel shows the standard 30s visit observations, middle panel shows 1s observations taken in twilight, and the bottom panel shows the twilight observations for one night. \label{fig:twi_maps}}
+\end{figure}
+
 
 ToO: Observing 10 or 50 ToOs per year. Minor impact on the science metrics as most ToO observations are in the WFD area.
 
