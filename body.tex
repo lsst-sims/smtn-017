@@ -298,7 +298,20 @@ virgo\_cluster:  Adding the Virgo cluster to the WFD footprint. This was such a 
 \caption{The various galactic plane footprints simulated.}
 \end{figure}
 
-We ran a variety of footprint variations requested by the community. These runs have some issues because they can make it difficult for the scheduler to identify large contiguous regions of sky to observe in blocks.
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/plane_pbf.pdf}
+\plotone{plots/plane_pbt.pdf}
+\plotone{plots/plane_pencil.pdf}
+\epsscale{1}
+\caption{Looking at simulations with different galactic plane coverage. Top panel shows different footprints, middle panel shows the same footprints plus pencil beam surveys, and the bottom shows only pencil beam surveys. \label{fig:gal_plane_radar}}
+\end{figure}
+
+
+We ran a variety of footprint variations requested by the community. These runs have some issues because they can make it difficult for the scheduler to identify large contiguous regions of sky to observe in blocks. Figure~\ref{fig:gal_plane_radar} shows that while we can see some improvement in the microlensing metrics, we currently lack metrics that show improvements in expanding Galactic plane coverage.
+
+
 
 \subsection{Good Seeing}
 
