@@ -207,6 +207,7 @@ Many of the solar system metrics are fairly insensitive to the fraction of time 
 \begin{figure}
 \epsscale{0.6}
 \plotone{plots/north_stripe.pdf}
+\plotone{plots/north_stripe_mags.pdf}
 \plotone{plots/footprints/north_stripe_v2_0_10yrs_Count_observationStartMJD_HEAL_SkyMap.pdf}
 \epsscale{1}
 \caption{Impact of adding a northern stripe to the footprint. \label{fig:north_stripe} }
@@ -252,6 +253,17 @@ Many of the solar system metrics are fairly insensitive to the fraction of time 
 \caption{Impact of observing NEOs in twilight time. Surprisingly reduces the fraction of faint NEOs recovered. \label{fig:twilight}}
 \end{figure}
 
+\begin{figure}
+% from https://github.com/lsst-sims/sims_featureScheduler_runs2.0/blob/main/microsurveys/twilight_neo/check_twi.ipynb
+\epsscale{0.6}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_note!twilight_neo_HEAL_SkyMap.pdf}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_notetwilight_neo_HEAL_SkyMap.pdf}
+\plotone{plots/twilight_neo_nightpattern1v2_0_Nvisits_as_function_of_Alt_Az_notetwilight_neo_and_night10_HEAL_SkyMap.pdf}
+\epsscale{1}
+\caption{Number of visits in Alt,Az projection for the twilight NEO microsurvey. The top panel shows the standard 30s visit observations, middle panel shows 1s observations taken in twilight, and the bottom panel shows the twilight observations for one night. \label{fig:twi_maps}}
+\end{figure}
+
+
 ToO: Observing 10 or 50 ToOs per year. Minor impact on the science metrics as most ToO observations are in the WFD area.
 
 
@@ -286,7 +298,20 @@ virgo\_cluster:  Adding the Virgo cluster to the WFD footprint. This was such a 
 \caption{The various galactic plane footprints simulated.}
 \end{figure}
 
-We ran a variety of footprint variations requested by the community. These runs have some issues because they can make it difficult for the scheduler to identify large contiguous regions of sky to observe in blocks.
+
+\begin{figure}
+\epsscale{0.6}
+\plotone{plots/plane_pbf.pdf}
+\plotone{plots/plane_pbt.pdf}
+\plotone{plots/plane_pencil.pdf}
+\epsscale{1}
+\caption{Looking at simulations with different galactic plane coverage. Top panel shows different footprints, middle panel shows the same footprints plus pencil beam surveys, and the bottom shows only pencil beam surveys. \label{fig:gal_plane_radar}}
+\end{figure}
+
+
+We ran a variety of footprint variations requested by the community. These runs have some issues because they can make it difficult for the scheduler to identify large contiguous regions of sky to observe in blocks. Figure~\ref{fig:gal_plane_radar} shows that while we can see some improvement in the microlensing metrics, we currently lack metrics that show improvements in expanding Galactic plane coverage.
+
+
 
 \subsection{Good Seeing}
 
@@ -297,20 +322,37 @@ We ran a variety of footprint variations requested by the community. These runs 
 \end{figure}
 
 
-xxx--already trying to gather good seeing images in some filters in the baseline.
+These runs attempt the observe the entire WFD area in "good seeing" conditions each year. This has already been incorporated into the baseline for the $gri$ filters (3 observations per year), so the relative changes here are minimal. We attempted to add $u$ to the list of filters getting good seeing observations, however there does not seem to be enough dark time to make this feasible.
+
+
+% Table from https://github.com/lsst-sims/sims_featureScheduler_runs2.1/blob/main/good_seeing/seeing_check.ipynb
+\begin{table}
+\caption{Area (sq deg) with good seeing in first year}
+\begin{tabular}{lrrrrrr}
+                      run &    u &     g &     r &     i &     z &     y \\
+                      \hline
+            baseline\_v2.1 & 3996 & 16814 & 23462 & 24304 & 21610 & 21577 \\
+  good\_seeing\_gsw0.0\_v2.1 & 8459 & 13990 & 21741 & 22890 & 22433 & 22453 \\
+ good\_seeing\_gsw20.0\_v2.1 & 2353 & 17730 & 24491 & 24231 & 21928 & 21125 \\
+  good\_seeing\_gsw3.0\_v2.1 & 4090 & 16641 & 23338 & 24319 & 22591 & 21487 \\
+good\_seeing\_u\_gsw3.0\_v2.1 & 8828 & 16390 & 23130 & 23479 & 22060 & 21330 \\
+\end{tabular}
+\end{table}
+
+{\bf Conclusions: The baseline currently comes close to covering the entire WFD area in good seeing conditions each year in $gri$. Adding $u$\ to good seeing does not seem feasible.}
 
 \subsection{Different Standard Exposure Time}
 
 
 \begin{figure}
 \plottwo{plots/shave_shorter.pdf}{plots/shave_longer.pdf}
-\caption{Trying different exposure times for all exposures.  }
+\caption{Trying different standard exposure times.  }
 \end{figure}
 
 
 We try standard exposure times from 20-40s.  The SNe metric seems surprisingly peaked at 30-32s for standard exposure times. This might be due to how they quantize redshift limits, since the number of SNe returned by the metric are the sum below a redshift completeness limit, a shift of 0.025 in the redshift limit could make a large change in N SNe($<z_{lim}$), but the actual total number of SNe would change more smoothly. 
 
-Note, the boost in the WL metric is artificial since it is based on number of observations and thus does not take into account the lower SNR of short exposures. 
+Note, the boost in the WL metric is artificial since it is based on number of observations and thus does not take into account the lower SNR of shorter exposures. 
 
 
 I'm not sure why proper motion and parallax benefit from shorter exposure times. Could be because the metric assumes no degeneracy between fit parameters. 
@@ -332,6 +374,11 @@ This series of runs looks at preventing more than two observations to a point wi
 
 \subsection{DDF Season Length}
 
+% From https://github.com/lsst-sims/sims_featureScheduler_runs2.1/blob/main/ddf_accourd/illustrate.ipynb
+\begin{figure}
+\plotone{plots/ddf_nvis_t.pdf}
+\caption{Examples of different DDF observing strategies. The season length, low cadence fraction, and low cadence rate are all varied. \label{fig:ddf_acourd}}
+\end{figure}
 
 
 \begin{figure}
