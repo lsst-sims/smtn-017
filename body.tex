@@ -9,14 +9,14 @@
 {\bf Fast Microlensing events}: Fraction of microlensing events between 5 and 10 days in duration that are recovered. \\
 {\bf Slow Microlensing events}: Fraction of microlensing events between 60 and 90 days in duration that are recovered.\\
 {\bf SRD fO value}: The area that reaches 825 visits (all filters). Should be around 18,000 square degrees. \\
-{\bf Bright NEOs}: Fraction of H=16 Near Earth Asteroid objects discovered. \\
-{\bf Faint NEOs}: Fraction of NEO objects with H=22 recovered. Note this metric can have significant variations due to shot noise.\\
-{\bf TNOs}: Fraction of H=6.0 Trans Neptunian Objects discovered.  \\
+{\bf Bright NEOs}: Fraction of H<=16 Near Earth Asteroid objects discovered. \\
+{\bf Faint NEOs}: Fraction of NEO objects with H<=22 recovered.  \\
+{\bf TNOs}: Fraction of H<=6.0 Trans Neptunian Objects discovered.  \\
 {\bf SNe}: The number of type Ia supernovae that are observed up to the redshift completeness limit. \\
 {\bf SNe, zlim}: The redshift completeness limit for Ia SNe. \\
 {\bf 3x2}: Figure of merit for the 3x2 correlation. Only uses i-band. \\
 {\bf Weak Lensing}: Number of visits in i-band that are suitable for weak lensing observations, includes an extinction cut. \\
-{\bf Transients, KNe}: The PrestoKNe metric. This metric generates 10,000 events. Unfortunately, in the baseline only around 400 of the events are detected, so we expect a run-to-run shot noise of ~5\%. The metric returns two scores ("P" and "S") which are highly correlated.  \\
+{\bf Transients, KNe}: The PrestoKNe metric. This metric generates 10,000 events. Unfortunately, in the baseline only around 400 of the events are detected, so we expect a run-to-run shot noise of ~5\%. The metric returns two scores ("P" and "S") which are highly correlated. Here we use the total of the score S.  \\
 {\bf XRB}: X-ray binary events. This metric generates 10,000 events, and here we check how many pass the early detection criteria. \\
 {\bf Brown Dwarf}:  This metric computes the volume we can detect L7 Brown Dwarfs in. Because brown drawfs are very red objects, this metric will be mostly sensitive to depth in the $izy$\ filters.\\
 
@@ -44,7 +44,7 @@ xxx--coadded depth, SNe. Maybe some AGN. Need photo-z
 
 \begin{figure}
 \plottwo{plots/baseline2_radar.pdf}{plots/baseline2_radar_zoom.pdf}
-\caption{The science impact of our latest baseline simulation. Plots are the same at different zoom levels. Metric values have been normalized to the v2.1 baseline.  \label{fig:baseline2_radar}}
+\caption{The science impact of our latest baseline simulation. Plots are the same at different zoom levels. Metric values have been normalized to the v2.1 baseline.  The major change of increasing the depth of the bulge leads to a huge increase in microlensing and XRB metrics. \label{fig:baseline2_radar}}
 \end{figure}
 
 \begin{figure}
@@ -120,7 +120,7 @@ Looks like we don't really have a metric that is sensitive to increasing $u$-dep
 \epsscale{0.6}
 \plotone{plots/rolling_more.pdf}
 \epsscale{1}
-\caption{Comparing a run with no rolling and one with an additional season of rolling. \label{fig:rolling_more}}
+\caption{Comparing a run with no rolling and one with an additional season of rolling. If we do not roll at all, the number of SNe has a dramatic drop, as to short transients. \label{fig:rolling_more}}
 \end{figure}
 
 
@@ -173,7 +173,7 @@ The LMC and SMC are currently observed as part of the WFD region, and thus get h
 \plotone{plots/rolling/six_rolling_ns6_rw0_5_v2_0_10yrs_Year2_5Count_night_gt_913_125000_and_night_lt_1278_375000_HEAL_SkyMap.pdf}
 \plotone{plots/rolling/six_rolling_ns6_rw0_9_v2_0_10yrs_Year2_5Count_night_gt_913_125000_and_night_lt_1278_375000_HEAL_SkyMap.pdf}
 \epsscale{1}
-\caption{6-band rolling}
+\caption{6-band rolling. This is so extreme the entire WFD area is not guaranteed to be covered every year.}
 \end{figure}
 
 \begin{figure}
@@ -221,12 +221,12 @@ xxx--need to double check what the astrometry SRD values are, the most aggressiv
 
 \begin{figure}
 \plottwo{plots/long_gaps.pdf}{plots/long_gaps_mags.pdf}
-\caption{Observing long gaps for the entire survey}
+\caption{Observing long gaps for the entire survey.}
 \end{figure}
 
 \begin{figure}
 \plottwo{plots/long_gaps_delayed.pdf}{plots/long_gaps_delayed_mags.pdf}
-\caption{Observing long gaps for the second half of the survey}
+\caption{Observing long gaps for the second half of the survey.}
 \end{figure}
 
 
@@ -239,7 +239,7 @@ xxx--Varying the amount of time spent in the plane. This may be obsolete now wit
 
 \begin{figure}
 \plottwo{plots/vary_nes1.pdf}{plots/vary_nes2.pdf}
-\caption{Results from varying the amount of time spent in the NES. \label{fig:vary_nes}}
+\caption{Results from varying the amount of time spent in the NES. Left plot shows NES fractions lower than the baseline, right panel shows NES fractions larger than the baseline. The metrics show relatively little variation, but we expect more noticeable changes in other solar system metrics. \label{fig:vary_nes}}
 \end{figure}
 
 \begin{figure}
@@ -339,6 +339,31 @@ virgo\_cluster:  Adding the Virgo cluster to the WFD footprint. This was such a 
 
 \section{v2.1 Runs}
 
+\subsection{Baseline}
+
+\begin{figure}
+\plottwo{plots/map_labels.pdf}{plots/time_fractions/baseline_v2_1_10yrs_Count_night_note_not_like_DD_HEAL_SkyMap.pdf}
+\caption{The left shows different regions used for the v2.1 baseline. Right shows the resultin number of visits. A breakdown is listed in Table~\ref{table:regions}.}
+\end{figure}
+
+\begin{table}
+\caption{Number and fraction of visits for the v2.1 baseline. \label{table:regions}}
+\begin{tabular}{lrr}
+      Label &  N visits &  Percent \\
+      \hline
+   (None)    &   16687.1 &     0.80 \\
+    LMC\_SMC &   42291.7 &     2.03 \\
+      bulge &   85322.1 &     4.09 \\
+dusty\_plane &  131940.0 &     6.33 \\
+    lowdust & 1598178.2 &    76.77 \\
+        nes &   89348.5 &     4.29 \\
+        scp &   17371.9 &     0.83 \\
+      virgo &    6647.0 &     0.31 \\
+       DDFs &   93962.0 &     4.51 \\
+\end{tabular}
+\end{table}
+
+
 \subsection{Galactic Plane Runs}
 
 \begin{figure}
@@ -431,6 +456,15 @@ This series of runs looks at preventing more than two observations to a point wi
 \caption{Shifting from the baseline to pre-scheduled DDF observations.}
 \end{figure}
 
+\subsection{Twilight NEO}
+
+\begin{figure}
+\plotone{plots/twi_15s.pdf}
+\caption{Science impact of dedicating twilight time to 15s visits looking near the sun.  \label{fig:twi_15}}
+\end{figure}
+
+Similar to the v2.0 twilight NEO survey, here we dedicate some variable fraction of twilight time to search for NEO objects. For these simulations, we use 15s visits. 
+
 \section{Metrics That Would Help}
 
 xxx--currently looking at running the photo-z metric to get more info on filter distribution in WFD and the DDFs.
@@ -444,12 +478,12 @@ xxx--We have some AGN metrics, I'm not sure they show much at the moment. We may
    \item{The v2.1 baseline is a very minor change over v2.0, adding the Virgo cluster to the WFD footprint which slightly lowers the median coadded depth.}
    \item{We find no major improvement in taking more observations in the $ug$\ filters, but should confirm the final filter depth distributions with a robust photo-z metric.}
    \item{Increasing the total time spent in $u$\ has detrimental effects to some science metrics. We currently don't see any science improvements from shifting to 50s $u$ exposures, but the final $u$ coadded depth increases $\sim$0.15 mags and there is a small increase in the SRD fO metric.}
-   \item{Starting rolling early looks to be a significant improvement for some metrics with a very minor penalty for astrometry. Note that if the survey ran an additional year, the proper motion penalty should be eliminated.}
-   \item{The SSSC should look in depth to confirm the impact of changing the NES fraction. Seems like the current level or slightly less time is the optimal.}
+   \item{Starting rolling early looks to be a significant improvement for some metrics with a very minor penalty for astrometry. Note that if the survey ran an additional 11th year, the proper motion penalty should be eliminated.}
+   \item{The SSSC should look in depth to confirm the impact of changing the NES fraction. Seems like the current level or very slightly less time is probably optimal.}
    \item{The baseline currently comes close to covering the entire WFD area in good seeing conditions each year in $gri$. Adding $u$\ to good seeing does not seem feasible.}
    \item{Taking steps to suppress (extra) repeat visits within a night seems like it could help multiple science cases. It is tough to tell if the KNe metric increase is "real", or if the v2.1 baseline is simply a $\sim 2\sigma$ low realization.}
-   \item{There are proposed footprints for more Galactic Plane coverage, but we lack clear metrics to evaluate them for Galactic science.}
-   \item{We have tried a variety of twilight NEO surveys, no science metrics show a compelling improvement.}
+   \item{There are proposed footprints for more Galactic Plane coverage. Covering the galactic plane more can boost microlensing metrics, but additional science metrics for the Galactic plane would be helpful.}
+   \item{We have tried a variety of twilight NEO surveys. They can increase the fraction of Vatrias objects recovered, but further simulations are planned for v2.2.}
    \item{{\bf The biggest tension appears to be between long and short timescale transients (where short is of order a day). While all the simulations identify many transients, the ability to classify short timescale transients hurts the light curve coverage of long transients. }}
 
 
